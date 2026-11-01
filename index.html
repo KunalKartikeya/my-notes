@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="referrer" content="no-referrer">
+<meta name="theme-color" content="#0d1120">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='14' fill='%23c9a24b'/%3E%3Ccircle cx='16' cy='13' r='3.2' fill='%234a3510'/%3E%3Cpath d='M14 14h4l1.6 7h-7.2z' fill='%234a3510'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://llcegxuzisqsnsgxigoh.supabase.co" crossorigin>
+<title>A letter for you</title>
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Secret Notes">
+<meta property="og:title" content="A letter for you">
+<meta property="og:description" content="A letter has been sealed for you. Open it with your code.">
+<meta property="og:url" content="https://kunalthedev-11.github.io/my-notes/">
+<meta property="og:image" content="https://kunalthedev-11.github.io/my-notes/og-classy.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="A sealed envelope with a gold seal and the words A letter for you"> 
+<meta name="twitter:card" content="summary_large_image">
+<meta name="description" content="A letter has been sealed for you. Open it with your code.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--night:#0d1120;--deep:#151a30;--edge:#2a3258;--paper:#f6f3ec;--text:#23201a;--muted:#8d96b3;--wax:#c9a24b;--wax2:#8a6a22;--ok:#e8ebf5;--err:#ff9a8b;color-scheme:dark}
+*{box-sizing:border-box}
+html,body{min-height:100%;margin:0}
+body{background:radial-gradient(1000px 600px at 50% -15%,#26305a 0,var(--night) 65%) fixed;color:var(--ok);font:16px/1.5 "Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;display:grid;place-items:center;padding:max(24px,env(safe-area-inset-top)) 20px max(24px,env(safe-area-inset-bottom));min-height:100vh;min-height:100dvh}
+main{width:100%;max-width:520px;text-align:center}
+h1{font:400 clamp(2rem,7vw,2.9rem)/1.1 Newsreader,Georgia,serif;margin:30px 0 8px;letter-spacing:-.015em}
+.sub{color:var(--muted);margin:0 auto 26px;max-width:36ch}
+
+/* envelope */
+.env{position:relative;width:min(290px,76vw);aspect-ratio:3/2;margin:0 auto;filter:drop-shadow(0 24px 30px #0008)}
+.env>*{position:absolute;left:0;right:0}
+.back{inset:0;background:#1b2245;border-radius:8px}
+.front{bottom:0;height:100%;background:linear-gradient(#222b55,#1b2245);clip-path:polygon(0 0,50% 56%,100% 0,100% 100%,0 100%);border-radius:8px}
+.flap{top:0;height:62%;background:linear-gradient(#2c376a,#252e5c);clip-path:polygon(0 0,100% 0,50% 100%);transform-origin:top;transition:transform .7s cubic-bezier(.5,0,.2,1),z-index 0s .35s;z-index:3;border-radius:8px 8px 0 0}
+.seal{left:50%;top:62%;width:54px;height:54px;margin:-27px 0 0 -27px;border-radius:50%;z-index:4;background:radial-gradient(circle at 35% 30%,#e8cf8a,var(--wax) 45%,var(--wax2));box-shadow:0 4px 10px #0007,inset 0 -3px 6px #0004;display:grid;place-items:center;transition:transform .5s,opacity .4s}
+.seal svg{width:22px;height:22px;fill:#4a3510;opacity:.85}
+.env.busy .seal{animation:pulse 1s ease-in-out infinite}
+.env.bad .seal{animation:shake .45s}
+.env.open .flap{transform:rotateX(180deg);z-index:1}
+.env.open .seal{transform:scale(1.6);opacity:0}
+@keyframes pulse{50%{transform:scale(1.1)}}
+@keyframes shake{20%,60%{transform:translateX(-7px) rotate(-6deg)}40%,80%{transform:translateX(7px) rotate(6deg)}}
+
+/* form */
+form{display:flex;gap:10px;margin-top:4px}
+.field{position:relative;flex:1;min-width:0}
+input{width:100%;font:500 1.15rem "Instrument Sans",sans-serif;letter-spacing:.06em;color:#fff;background:var(--deep);border:1.5px solid var(--edge);border-radius:12px;padding:15px 74px 15px 16px;outline:none;transition:border-color .2s,box-shadow .2s}
+input::placeholder{letter-spacing:0;color:#6d7699}
+input:focus{border-color:var(--wax);box-shadow:0 0 0 4px rgba(201,162,75,.25)}
+.eye{position:absolute;right:6px;top:50%;transform:translateY(-50%);background:none;color:var(--muted);padding:8px 10px;font-size:.85rem;font-weight:500;border-radius:8px}
+.eye:hover{color:#fff;background:#ffffff12}
+button{font:600 1rem "Instrument Sans",sans-serif;border:0;border-radius:12px;cursor:pointer;transition:transform .1s,filter .2s,background .2s}
+.go{background:var(--wax);color:#241a05;padding:0 24px}
+.go:hover{filter:brightness(1.1)}.go:active{transform:scale(.97)}
+.go[disabled]{opacity:.55;cursor:not-allowed}
+button:focus-visible,input:focus-visible{outline:3px solid #fff;outline-offset:2px}
+.msg{min-height:1.6em;margin:14px 0 0;color:var(--err);font-size:.95rem}
+.msg.info{color:var(--muted)}
+
+/* letter */
+.letter{text-align:left;background:var(--paper);color:var(--text);border-radius:4px 4px 14px 14px;border-top:5px solid var(--wax);padding:clamp(24px,6vw,46px);box-shadow:0 34px 70px -24px #000c;transform-origin:top;animation:unfold .8s cubic-bezier(.2,.8,.2,1)}
+@keyframes unfold{from{transform:perspective(1000px) rotateX(-75deg) translateY(-20px);opacity:0}to{transform:none;opacity:1}}
+.letter h2{font:500 clamp(1.5rem,5vw,1.9rem)/1.2 Newsreader,Georgia,serif;margin:0 0 4px}
+.date{color:#8a8270;font-size:.85rem;margin:0 0 24px}
+.body{font:400 clamp(1.1rem,3.6vw,1.25rem)/1.75 Newsreader,Georgia,serif;white-space:pre-wrap;overflow-wrap:anywhere;max-width:62ch}
+.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:30px;padding-top:20px;border-top:1px solid #ddd6c6}
+.ghost{background:transparent;color:var(--text);border:1.5px solid #cfc7b3;padding:10px 16px;font-size:.9rem}
+.ghost:hover{background:#ece6d6}
+.ghost:focus-visible{outline-color:var(--text)}
+.note{color:var(--muted);font-size:.8rem;margin-top:18px}
+[hidden]{display:none!important}
+@media(max-width:480px){form{flex-direction:column}.go{padding:15px}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+/* ---- animations ---- */
+main{position:relative;z-index:1}
+.sky{position:fixed;inset:0;overflow:hidden;pointer-events:none;z-index:0}
+.sky::before,.sky::after{content:"";position:absolute;width:60vmax;height:60vmax;border-radius:50%;filter:blur(90px)}
+.sky::before{background:#3b4a9a;opacity:.28;left:-20vmax;top:-28vmax;animation:drift 26s ease-in-out infinite alternate}
+.sky::after{background:var(--wax);opacity:.12;right:-26vmax;bottom:-32vmax;animation:drift 32s ease-in-out infinite alternate-reverse}
+.sky i{position:absolute;width:3px;height:3px;border-radius:50%;background:#cfd6ff;opacity:0;animation:twinkle var(--d) var(--l) infinite ease-in-out}
+.spark{position:fixed;width:5px;height:5px;border-radius:50%;pointer-events:none;z-index:50}
+.env{transform:perspective(800px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));transition:transform .25s ease-out;animation:drop 1s cubic-bezier(.2,1.2,.4,1) backwards,bob 5s 1s ease-in-out infinite}
+.env.open{animation:lift .8s forwards}
+.seal{animation:glow 3s ease-in-out infinite}
+.env.tick .seal{animation:tick .18s}
+.env.lock .seal{animation:wobble .9s}
+#gate h1{animation:rise .8s .45s both}
+.sub{animation:rise .8s .6s both}
+form{animation:rise .8s .75s both}
+.msg:not(:empty){animation:rise .35s both}
+.go{position:relative;overflow:hidden}
+.go::after{content:"";position:absolute;inset:0;background:linear-gradient(100deg,transparent 30%,rgba(255,255,255,.35) 50%,transparent 70%);transform:translateX(-120%);animation:shine 4s 2s infinite}
+.go:hover{translate:0 -2px;box-shadow:0 8px 20px -6px var(--wax)}
+.field.err input{animation:errflash .5s}
+.letter>h2{animation:rise .7s .35s both}
+.letter>.date{animation:rise .7s .5s both}
+.w{animation:fadeword .55s both}
+.from,#reply,.actions,.note{animation:rise .7s var(--tail,1s) both}
+.letter.closing{animation:fold .45s ease-in forwards}
+.ghost{transition:background .2s,translate .2s}
+.ghost:hover{translate:0 -2px}
+.pop{animation:pop .5s}
+@keyframes rise{from{opacity:0;translate:0 14px}}
+@keyframes drop{from{opacity:0;translate:0 -70px;scale:.9}}
+@keyframes bob{50%{translate:0 -9px}}
+@keyframes lift{to{translate:0 -14px;scale:1.05}}
+@keyframes glow{50%{box-shadow:0 4px 10px #0007,inset 0 -3px 6px #0004,0 0 24px 5px rgba(201,162,75,.55)}}
+@keyframes tick{50%{scale:1.14}}
+@keyframes wobble{20%,60%{rotate:-9deg}40%,80%{rotate:9deg}}
+@keyframes shine{40%,100%{transform:translateX(120%)}}
+@keyframes errflash{30%{border-color:var(--err);box-shadow:0 0 0 4px rgba(255,154,139,.25);translate:-6px 0}60%{translate:6px 0}}
+@keyframes fadeword{from{opacity:0;filter:blur(5px)}}
+@keyframes fold{to{transform:perspective(1000px) rotateX(-75deg) translateY(-20px);opacity:0}}
+@keyframes pop{40%{scale:1.18}}
+@keyframes twinkle{50%{opacity:.75;transform:scale(1.7)}}
+@keyframes drift{to{translate:12vmax 8vmax}}
+@media print{.sky,.spark,#progress{display:none!important}.w{animation:none!important;opacity:1!important;filter:none!important}}
+.body.dropcap::first-letter{float:left;font-size:3.7em;line-height:.8;padding:.07em .1em 0 0;color:var(--wax2);font-weight:500}
+.date::after{content:"";display:block;width:56px;height:1px;margin-top:16px;background:var(--wax)}
+::selection{background:rgba(201,162,75,.35)}
+h1,.letter>h2{text-wrap:balance}
+.body{text-wrap:pretty;font-size:calc(var(--fs,1) * clamp(1.1rem,3.6vw,1.25rem))}
+.letter h2:focus{outline:none}
+#progress{position:fixed;top:0;left:0;height:3px;width:100%;background:var(--wax);transform:scaleX(0);transform-origin:0 50%;z-index:70;pointer-events:none}
+[data-theme=ocean]{--wax:#1f9d9a;--wax2:#136b6a}
+[data-theme=gold]{--wax:#c4922a;--wax2:#8a6314}
+[data-theme=violet]{--wax:#7b5cd6;--wax2:#4f3a9e}
+[data-theme=forest]{--wax:#3f9a5f;--wax2:#276b3e}
+.from{font:italic 1.2rem Newsreader,Georgia,serif;text-align:right;margin:22px 0 0}
+.from:empty{display:none}
+#reply{margin-top:26px;padding-top:20px;border-top:1px solid #ddd6c6}
+#reply label{display:block;font-weight:500;margin-bottom:8px}
+#reply textarea{width:100%;min-height:90px;resize:vertical;font:1rem/1.5 "Instrument Sans",sans-serif;color:var(--text);background:#fff;border:1.5px solid #cfc7b3;border-radius:10px;padding:12px;outline:none}
+#reply textarea:focus{border-color:var(--wax);box-shadow:0 0 0 3px rgba(120,120,160,.2)}
+#reply .ghost{margin-top:10px}
+#reply .msg{min-height:0}
+.pr-only,.pr-head{display:none}
+@page{margin:22mm 24mm 24mm;@bottom-center{content:"Page " counter(page) " of " counter(pages);font:9pt "Instrument Sans",Arial,sans-serif;color:#888}}
+@media print{
+html,body{background:#fff!important;height:auto;min-height:0}
+body{display:block;padding:0;color:#1a1a1a;font-size:12pt;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+main{max-width:none}
+#gate,.actions,.note,#reply{display:none!important}
+.from{max-width:34em;margin:20pt auto 0;text-align:right;font-size:13pt;color:#333}
+.letter{display:block;background:#fff;color:#1a1a1a;box-shadow:none;animation:none;transform:none;opacity:1;border:0;border-radius:0;padding:0;text-align:center}
+.pr-head{display:block;margin:0 0 14pt;break-inside:avoid}
+.pr-head svg{width:36pt;height:36pt}
+.letter h2{font-size:28pt;line-height:1.15;font-weight:500;color:#000;margin:0 auto 8pt;max-width:30ch;letter-spacing:-.01em;break-after:avoid}
+.date{color:#666;font:italic 10.5pt/1.4 Newsreader,Georgia,serif;margin:0 0 26pt}
+.date::after{content:"";display:block;height:1pt;width:38%;margin:16pt auto 0;background:linear-gradient(90deg,transparent,var(--wax),transparent)}
+.body{text-align:left;font-size:12.5pt;line-height:1.75;color:#1a1a1a;max-width:34em;margin:0 auto;orphans:3;widows:3;hyphens:auto;-webkit-hyphens:auto}
+.body.dropcap::first-letter{float:left;font-size:46pt;line-height:.82;padding:4pt 7pt 0 0;color:var(--wax);font-weight:500}
+#prFoot{display:block;margin:34pt auto 0;text-align:center;font:9pt "Instrument Sans",Arial,sans-serif;color:#888;break-inside:avoid}
+#prFoot::before{content:"";display:block;width:7pt;height:7pt;border-radius:50%;background:var(--wax);margin:0 auto 9pt}
+}
+</style>
+</head>
+<body>
+<div id="progress" aria-hidden="true"></div>
+<main>
+  <section id="gate">
+    <div class="env" id="env" aria-hidden="true">
+      <div class="back"></div><div class="front"></div><div class="flap"></div>
+      <div class="seal"><svg viewBox="0 0 24 24"><path d="M12 2a5 5 0 0 0-5 5v3H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8a2 2 0 0 0-2-2h-1V7a5 5 0 0 0-5-5zm-3 8V7a3 3 0 1 1 6 0v3H9z"/></svg></div>
+    </div>
+    <h1>A letter for you</h1>
+    <p class="sub">Enter your code to break the seal.</p>
+    <form id="form" autocomplete="off" novalidate>
+      <div class="field">
+        <input id="code" type="password" placeholder="Your secret code" aria-label="Secret code" maxlength="100" autocapitalize="off" autocorrect="off" spellcheck="false" autofocus>
+        <button type="button" class="eye" id="eye" aria-label="Show code">Show</button>
+      </div>
+      <button class="go" id="go" type="submit">Open letter</button>
+    </form>
+    <p class="msg" id="msg" role="status" aria-live="polite"></p>
+    <noscript><p class="sub">This page needs JavaScript turned on to open your letter.</p></noscript>
+  </section>
+
+  <article class="letter" id="letter" hidden>
+    <div class="pr-head" aria-hidden="true"><svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="22" style="fill:var(--wax)"/><circle cx="24" cy="24" r="17" fill="none" style="stroke:var(--wax2)" stroke-width="1.5" opacity=".6"/><path transform="translate(12 12)" fill="#fff" fill-opacity=".88" d="M12 2a5 5 0 0 0-5 5v3H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8a2 2 0 0 0-2-2h-1V7a5 5 0 0 0-5-5zm-3 8V7a3 3 0 1 1 6 0v3H9z"/></svg></div>
+    <h2 id="title" tabindex="-1"></h2>
+    <p class="date" id="date"></p>
+    <div class="body" id="body"></div>
+    <p class="from" id="from"></p>
+    <div id="reply" hidden>
+      <label for="replyText">Want to write back?</label>
+      <textarea id="replyText" maxlength="2000" placeholder="Your message…"></textarea>
+      <button class="ghost" id="sendReply" type="button">Send reply</button>
+      <p class="msg" id="replyMsg" role="status" aria-live="polite"></p>
+    </div>
+    <div class="actions">
+      <button class="ghost" id="smaller" aria-label="Smaller text">A−</button>
+      <button class="ghost" id="larger" aria-label="Larger text">A+</button>
+      <button class="ghost" id="copy">Copy note</button>
+      <button class="ghost" id="print">Print or save PDF</button>
+      <button class="ghost" id="lock">Close note</button>
+    </div>
+    <p class="note" id="noteInfo">This note closes itself after 5 minutes of inactivity.</p>
+    <p class="pr-only" id="prFoot"></p>
+  </article>
+</main>
+
+<script>
+// Your Supabase details. The anon/publishable key is safe to publish.
+const SUPABASE_URL = "https://llcegxuzisqsnsgxigoh.supabase.co";
+const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxsY2VneHV6aXNxc25zZ3hpZ29oIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTM0NTE5NDEsImV4cCI6MjEwOTAyNzk0MX0.vNTPbKZfInYf8KgFX1zRQn1g--XKloJenU85imfljFA";
+
+const $ = id => document.getElementById(id);
+const wait = ms => new Promise(r => setTimeout(r, ms));
+const calm = matchMedia("(prefers-reduced-motion: reduce)").matches;
+const say = (t, info) => { $("msg").textContent = t; $("msg").className = "msg" + (info ? " info" : ""); };
+let fails = 0, lockUntil = 0, ticker, idle, busy = false, currentCode = "";
+
+const fetchNote = code => rpc("get_note", { p_code: code });
+async function rpc(fn, args) {
+  if (!navigator.onLine) throw new Error("offline");
+  const headers = { apikey: SUPABASE_ANON_KEY, "Content-Type": "application/json" };
+  if (!SUPABASE_ANON_KEY.startsWith("sb_")) headers.Authorization = "Bearer " + SUPABASE_ANON_KEY;
+  let lastErr;
+  for (let i = 0; i < 3; i++) {                        // retry flaky connections
+    const ctl = new AbortController(), t = setTimeout(() => ctl.abort(), 10000);
+    try {
+      const res = await fetch(SUPABASE_URL + "/rest/v1/rpc/" + fn, {
+        method: "POST", headers, signal: ctl.signal, body: JSON.stringify(args)
+      });
+      if (res.status >= 500) throw new Error("server");
+      if (!res.ok) throw new Error("bad");
+      return await res.json();
+    } catch (e) { lastErr = e; await wait(500 * (i + 1)); }
+    finally { clearTimeout(t); }
+  }
+  throw lastErr;
+}
+
+function setEnv(state) { $("env").classList.remove("busy", "bad", "lock"); if (state) $("env").classList.add(state); }
+
+function startCooldown(sec) {
+  lockUntil = Date.now() + sec * 1000; $("go").disabled = true;
+  clearInterval(ticker);
+  ticker = setInterval(() => {
+    const left = Math.ceil((lockUntil - Date.now()) / 1000);
+    if (left <= 0) { clearInterval(ticker); $("go").disabled = false; fails = 0; say(""); return; }
+    say("Too many wrong tries. You can try again in " + left + "s.");
+  }, 250);
+}
+
+async function openNote(code) {
+  if (busy || Date.now() < lockUntil || !code) return;
+  busy = true; $("go").disabled = true; setEnv("busy"); say("Checking…", true);
+  try {
+    const r = await fetchNote(code);
+    if (r && r.ok) {
+      setEnv(); fails = 0; say("");
+      $("title").textContent = r.title || "A letter for you";
+      $("date").textContent = new Date(r.created_at).toLocaleDateString(undefined, { dateStyle: "long" });
+      $("body").textContent = r.body; $("body").classList.toggle("dropcap", r.body.trim().length > 300);                  // textContent: nothing in a note can inject HTML
+      currentCode = code;
+      $("code").value = "";
+      document.documentElement.dataset.theme = r.theme || "wax";
+      $("from").textContent = r.sender ? "— " + r.sender : "";
+      $("reply").hidden = !r.allow_reply; $("replyText").value = ""; $("replyMsg").textContent = "";
+      let info = "This note closes itself after 5 minutes of inactivity.";
+      if (r.views_left === 0) info += " It can’t be opened again once you close it.";
+      else if (r.views_left > 0) info += " It can be opened " + r.views_left + " more time" + (r.views_left === 1 ? "" : "s") + ".";
+      $("noteInfo").textContent = info;
+      revealBody(r.body);
+      if (!calm) burst();
+      $("env").classList.add("open");
+      await wait(calm ? 0 : 750);
+      $("gate").hidden = true; $("letter").hidden = false;
+      window.scrollTo(0, 0); armIdle(); $("title").focus({ preventScroll: true });
+    } else if (r && r.error === "locked") {
+      setEnv("lock"); say("This note is sealed until " + new Date(r.unlock_at).toLocaleString(undefined, { dateStyle: "long", timeStyle: "short" }) + ". Come back then.", true);
+    } else if (r && r.error === "busy") {
+      setEnv(); say("Lots of guesses right now. Wait a minute and try again.");
+    } else {
+      setEnv("bad"); fails++;
+      const fld = document.querySelector(".field"); fld.classList.remove("err"); void fld.offsetWidth; fld.classList.add("err");
+      say("That code doesn’t match any note. Check the spelling and try again.");
+      if (fails >= 5) startCooldown(30);
+    }
+  } catch (e) {
+    setEnv();
+    say(navigator.onLine ? "Couldn’t reach the server. Please try again in a moment." : "You’re offline. Reconnect and try again.");
+  }
+  busy = false;
+  if (Date.now() >= lockUntil) $("go").disabled = false;
+}
+
+async function closeNote() {
+  clearTimeout(idle);
+  if (!$("letter").hidden && !calm) { $("letter").classList.add("closing"); await wait(450); $("letter").classList.remove("closing"); }
+  $("letter").hidden = true; $("body").textContent = ""; $("title").textContent = "";
+  currentCode = ""; delete document.documentElement.dataset.theme; $("from").textContent = ""; $("replyText").value = ""; $("progress").style.transform = "scaleX(0)";
+  $("gate").hidden = false; setEnv(); $("env").classList.remove("open");
+  history.replaceState(null, "", location.pathname + location.search);
+  $("code").focus();
+}
+function armIdle() { clearTimeout(idle); idle = setTimeout(closeNote, 5 * 60 * 1000); }
+["pointerdown", "keydown", "scroll", "touchstart"].forEach(ev =>
+  addEventListener(ev, () => { if (!$("letter").hidden) armIdle(); }, { passive: true }));
+
+$("form").addEventListener("submit", e => { e.preventDefault(); openNote($("code").value.trim()); });
+$("code").addEventListener("input", () => { if (!busy && Date.now() > lockUntil) { say(""); setEnv(); } });
+$("eye").onclick = () => {
+  const show = $("code").type === "password";
+  $("code").type = show ? "text" : "password";
+  $("eye").textContent = show ? "Hide" : "Show";
+  $("eye").setAttribute("aria-label", show ? "Hide code" : "Show code");
+};
+$("lock").onclick = closeNote;
+$("sendReply").onclick = async () => {
+  const m = $("replyText").value.trim(); if (!m || !currentCode) return;
+  const out = $("replyMsg"); $("sendReply").disabled = true; out.className = "msg info"; out.textContent = "Sending…";
+  try {
+    const r = await rpc("send_reply", { p_code: currentCode, p_message: m });
+    if (r && r.ok) { out.className = "msg info pop"; out.textContent = "Sent. Thank you!"; $("replyText").value = ""; }
+    else { out.className = "msg"; out.textContent = r && r.error === "busy" ? "You’ve sent a lot of messages. Try again later." : "Couldn’t send that. Please try again."; }
+  } catch { out.className = "msg"; out.textContent = "Couldn’t reach the server. Please try again."; }
+  $("sendReply").disabled = false;
+};
+$("print").onclick = () => print();
+let savedTitle = document.title;
+addEventListener("beforeprint", () => {
+  if ($("letter").hidden) return;
+  savedTitle = document.title;
+  const t = ($("title").textContent || "").replace(/[\\/:*?"<>|]+/g, "").trim().slice(0, 60);
+  document.title = t || "Note";                      // becomes the PDF file name
+  $("prFoot").textContent = "Printed " + new Date().toLocaleDateString(undefined, { dateStyle: "long" });
+});
+addEventListener("afterprint", () => { document.title = savedTitle; });
+$("copy").onclick = async () => {
+  try { await navigator.clipboard.writeText($("title").textContent + "\n\n" + $("body").textContent); $("copy").textContent = "Copied"; $("copy").classList.add("pop"); }
+  catch { $("copy").textContent = "Select the text to copy"; }
+  setTimeout(() => { $("copy").textContent = "Copy note"; $("copy").classList.remove("pop"); }, 1800);
+};
+addEventListener("online", () => say(""));
+
+// ---- animations ----
+function revealBody(text) {                         // words fade in one by one (spans use textContent: still injection-safe)
+  const el = $("body"); el.textContent = "";
+  const parts = text.split(/(\s+)/), words = parts.filter(p => p.trim()).length;
+  if (calm || words > 450) { el.textContent = text; $("letter").style.setProperty("--tail", ".9s"); return; }
+  const step = Math.min(0.03, 2 / words); let i = 0;
+  for (const p of parts) {
+    if (!p.trim()) { el.append(p); continue; }
+    const w = document.createElement("span"); w.className = "w"; w.textContent = p;
+    w.style.animationDelay = (0.7 + i++ * step) + "s"; el.append(w);
+  }
+  $("letter").style.setProperty("--tail", (0.9 + words * step) + "s");
+}
+function burst() {                                   // sparkle burst when the seal breaks
+  const r = $("env").querySelector(".seal").getBoundingClientRect();
+  const cx = r.left + r.width / 2, cy = r.top + r.height / 2;
+  const cols = ["#e8cf8a", "#c9a24b", "#f6f3ec"];
+  for (let i = 0; i < 14; i++) {
+    const p = document.createElement("i"); p.className = "spark";
+    p.style.cssText = `left:${cx}px;top:${cy}px;background:${cols[i % cols.length]}`;
+    document.body.append(p);
+    const a = Math.random() * Math.PI * 2, d = 70 + Math.random() * 130;
+    p.animate([{ transform: "translate(-50%,-50%) scale(1)", opacity: 1 },
+      { transform: `translate(calc(-50% + ${Math.cos(a) * d}px), calc(-50% + ${Math.sin(a) * d + 40}px)) rotate(${Math.random() * 540}deg) scale(.3)`, opacity: 0 }],
+      { duration: 800 + Math.random() * 500, easing: "cubic-bezier(.15,.7,.3,1)" }).onfinish = () => p.remove();
+  }
+}
+(function () {                                       // twinkling stars + envelope tilt + typing tick
+  const sky = document.createElement("div"); sky.className = "sky"; sky.setAttribute("aria-hidden", "true");
+  for (let i = 0; i < 22; i++) {
+    const st = document.createElement("i");
+    st.style.cssText = `left:${Math.random() * 100}%;top:${Math.random() * 100}%;--d:${3 + Math.random() * 4}s;--l:${Math.random() * 5}s`;
+    sky.append(st);
+  }
+  document.body.prepend(sky);
+  if (!calm && matchMedia("(pointer:fine)").matches) addEventListener("pointermove", e => {
+    $("env").style.setProperty("--ry", ((e.clientX / innerWidth - .5) * 14) + "deg");
+    $("env").style.setProperty("--rx", (-(e.clientY / innerHeight - .5) * 10) + "deg");
+  }, { passive: true });
+  $("code").addEventListener("input", () => { const e = $("env"); e.classList.remove("tick"); void e.offsetWidth; e.classList.add("tick"); });
+  $("env").addEventListener("animationend", ev => { if (ev.animationName === "tick") $("env").classList.remove("tick"); });
+})();
+
+// ---- reading comforts ----
+let fs = 1;
+const setFs = d => { fs = Math.min(1.6, Math.max(.85, fs + d)); document.documentElement.style.setProperty("--fs", fs); };
+$("smaller").onclick = () => setFs(-.1); $("larger").onclick = () => setFs(.1);
+addEventListener("scroll", () => {                   // thin gold reading-progress line
+  const h = document.documentElement.scrollHeight - innerHeight;
+  $("progress").style.transform = "scaleX(" + (h > 0 && !$("letter").hidden ? Math.min(1, scrollY / h) : 0) + ")";
+}, { passive: true });
+addEventListener("keydown", e => { if (e.key === "Escape" && !$("letter").hidden) closeNote(); });
+$("replyText").addEventListener("keydown", e => { if (e.key === "Enter" && (e.ctrlKey || e.metaKey)) $("sendReply").click(); });
+
+// Optional magic link: yoursite/#your-code opens the note straight away.
+// The part after # never leaves the browser, and it is wiped from the address bar once used.
+if (location.hash.length > 1) {
+  const c = decodeURIComponent(location.hash.slice(1));
+  history.replaceState(null, "", location.pathname + location.search);
+  openNote(c.trim());
+}
+</script>
+</body>
+</html>

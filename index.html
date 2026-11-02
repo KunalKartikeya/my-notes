@@ -17,139 +17,133 @@
 <meta property="og:image" content="https://kunalkartikeya.github.io/my-notes/og-classy.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="A sealed envelope with a gold seal and the words A letter for you"> 
+<meta property="og:image:alt" content="A sealed envelope with a gold seal and the words A letter for you">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="description" content="A letter has been sealed for you. Open it with your code.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-:root{--night:#0d1120;--deep:#151a30;--edge:#2a3258;--paper:#f6f3ec;--text:#23201a;--muted:#8d96b3;--wax:#c9a24b;--wax2:#8a6a22;--ok:#e8ebf5;--err:#ff9a8b;color-scheme:dark}
+:root{--night:#0d1120;--deep:#151a30;--edge:#2a3258;--paper:#f6f3ec;--text:#23201a;--muted:#a3abc7;--wax:#c9a24b;--wax2:#8a6a22;--ok:#e8ebf5;--err:#ff9a8b;color-scheme:dark}
 *{box-sizing:border-box}
 html,body{min-height:100%;margin:0}
 body{background:radial-gradient(1000px 600px at 50% -15%,#26305a 0,var(--night) 65%) fixed;color:var(--ok);font:16px/1.5 "Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;display:grid;place-items:center;padding:max(24px,env(safe-area-inset-top)) 20px max(24px,env(safe-area-inset-bottom));min-height:100vh;min-height:100dvh}
-main{width:100%;max-width:520px;text-align:center}
-h1{font:400 clamp(2rem,7vw,2.9rem)/1.1 Newsreader,Georgia,serif;margin:30px 0 8px;letter-spacing:-.015em}
+main{position:relative;z-index:1;width:100%;max-width:520px;text-align:center}
+h1{font:400 clamp(2rem,7vw,2.9rem)/1.1 Newsreader,Georgia,serif;margin:30px 0 8px;letter-spacing:-.015em;text-wrap:balance}
 .sub{color:var(--muted);margin:0 auto 26px;max-width:36ch}
 
 /* envelope */
-.env{position:relative;width:min(290px,76vw);aspect-ratio:3/2;margin:0 auto;filter:drop-shadow(0 24px 30px #0008)}
+.env{position:relative;width:min(290px,76vw);aspect-ratio:3/2;margin:0 auto;filter:drop-shadow(0 24px 30px #0008);cursor:pointer;transform:perspective(800px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));transition:transform .25s ease-out;animation:drop 1s cubic-bezier(.2,1.2,.4,1) backwards,bob 5s 1s ease-in-out infinite}
 .env>*{position:absolute;left:0;right:0}
 .back{inset:0;background:#1b2245;border-radius:8px}
 .front{bottom:0;height:100%;background:linear-gradient(#222b55,#1b2245);clip-path:polygon(0 0,50% 56%,100% 0,100% 100%,0 100%);border-radius:8px}
 .flap{top:0;height:62%;background:linear-gradient(#2c376a,#252e5c);clip-path:polygon(0 0,100% 0,50% 100%);transform-origin:top;transition:transform .7s cubic-bezier(.5,0,.2,1),z-index 0s .35s;z-index:3;border-radius:8px 8px 0 0}
-.seal{left:50%;top:62%;width:54px;height:54px;margin:-27px 0 0 -27px;border-radius:50%;z-index:4;background:radial-gradient(circle at 35% 30%,#e8cf8a,var(--wax) 45%,var(--wax2));box-shadow:0 4px 10px #0007,inset 0 -3px 6px #0004;display:grid;place-items:center;transition:transform .5s,opacity .4s}
+.seal{left:50%;top:62%;width:54px;height:54px;margin:-27px 0 0 -27px;border-radius:50%;z-index:4;background:radial-gradient(circle at 35% 30%,#e8cf8a,var(--wax) 45%,var(--wax2));box-shadow:0 4px 10px #0007,inset 0 -3px 6px #0004;display:grid;place-items:center;transition:transform .5s,opacity .4s;animation:glow 3s ease-in-out infinite}
 .seal svg{width:22px;height:22px;fill:#4a3510;opacity:.85}
 .env.busy .seal{animation:pulse 1s ease-in-out infinite}
 .env.bad .seal{animation:shake .45s}
+.env.lock .seal{animation:wobble .9s}
+.env.tick .seal{animation:tick .18s}
+.env.open{animation:lift .8s forwards}
 .env.open .flap{transform:rotateX(180deg);z-index:1}
 .env.open .seal{transform:scale(1.6);opacity:0}
-@keyframes pulse{50%{transform:scale(1.1)}}
-@keyframes shake{20%,60%{transform:translateX(-7px) rotate(-6deg)}40%,80%{transform:translateX(7px) rotate(6deg)}}
 
 /* form */
-form{display:flex;gap:10px;margin-top:4px}
+form{display:flex;gap:10px;margin-top:4px;animation:rise .8s .75s both}
 .field{position:relative;flex:1;min-width:0}
 input{width:100%;font:500 1.15rem "Instrument Sans",sans-serif;letter-spacing:.06em;color:#fff;background:var(--deep);border:1.5px solid var(--edge);border-radius:12px;padding:15px 74px 15px 16px;outline:none;transition:border-color .2s,box-shadow .2s}
-input::placeholder{letter-spacing:0;color:#6d7699}
+input::placeholder{letter-spacing:0;color:#7e87ab}
 input:focus{border-color:var(--wax);box-shadow:0 0 0 4px rgba(201,162,75,.25)}
 .eye{position:absolute;right:6px;top:50%;transform:translateY(-50%);background:none;color:var(--muted);padding:8px 10px;font-size:.85rem;font-weight:500;border-radius:8px}
 .eye:hover{color:#fff;background:#ffffff12}
 button{font:600 1rem "Instrument Sans",sans-serif;border:0;border-radius:12px;cursor:pointer;transition:transform .1s,filter .2s,background .2s}
-.go{background:var(--wax);color:#241a05;padding:0 24px}
-.go:hover{filter:brightness(1.1)}.go:active{transform:scale(.97)}
-.go[disabled]{opacity:.55;cursor:not-allowed}
+.go{position:relative;overflow:hidden;background:var(--wax);color:#241a05;padding:0 24px}
+.go::after{content:"";position:absolute;inset:0;background:linear-gradient(100deg,transparent 30%,rgba(255,255,255,.35) 50%,transparent 70%);transform:translateX(-120%);animation:shine 4s 2s infinite}
+.go:hover{filter:brightness(1.1);translate:0 -2px;box-shadow:0 8px 20px -6px var(--wax)}
+.go:active{transform:scale(.97)}
+.go[disabled]{opacity:.55;cursor:not-allowed;translate:none;box-shadow:none}
 button:focus-visible,input:focus-visible{outline:3px solid #fff;outline-offset:2px}
 .msg{min-height:1.6em;margin:14px 0 0;color:var(--err);font-size:.95rem}
 .msg.info{color:var(--muted)}
+.msg:not(:empty){animation:rise .35s both}
+.field.err input{animation:errflash .5s}
+#gate h1{animation:rise .8s .45s both}
+.sub{animation:rise .8s .6s both}
 
 /* letter */
 .letter{text-align:left;background:var(--paper);color:var(--text);border-radius:4px 4px 14px 14px;border-top:5px solid var(--wax);padding:clamp(24px,6vw,46px);box-shadow:0 34px 70px -24px #000c;transform-origin:top;animation:unfold .8s cubic-bezier(.2,.8,.2,1)}
-@keyframes unfold{from{transform:perspective(1000px) rotateX(-75deg) translateY(-20px);opacity:0}to{transform:none;opacity:1}}
-.letter h2{font:500 clamp(1.5rem,5vw,1.9rem)/1.2 Newsreader,Georgia,serif;margin:0 0 4px}
-.date{color:#8a8270;font-size:.85rem;margin:0 0 24px}
-.body{font:400 clamp(1.1rem,3.6vw,1.25rem)/1.75 Newsreader,Georgia,serif;white-space:pre-wrap;overflow-wrap:anywhere;max-width:62ch}
+.letter{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 .5 0 0 0 0 .45 0 0 0 0 .35 0 0 0 .08 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+.letter.closing{animation:fold .45s ease-in forwards}
+.letter h2{font:500 clamp(1.5rem,5vw,1.9rem)/1.2 Newsreader,Georgia,serif;margin:0 0 4px;text-wrap:balance;animation:rise .7s .35s both}
+.letter h2:focus{outline:none}
+.date{color:#6f6856;font-size:.85rem;margin:0 0 24px;animation:rise .7s .5s both}
+.date::after{content:"";display:block;width:56px;height:1px;margin-top:16px;background:var(--wax)}
+.body{font:400 1.25rem/1.75 Newsreader,Georgia,serif;font-size:calc(clamp(1.1rem,3.6vw,1.25rem)*var(--fs,1));white-space:pre-wrap;overflow-wrap:anywhere;max-width:62ch;text-wrap:pretty}
+.body.dropcap::first-letter{float:left;font-size:3.7em;line-height:.8;padding:.07em .1em 0 0;color:var(--wax2);font-weight:500}
+.w{animation:fadeword .55s both}
+.from{font:italic 1.2rem Newsreader,Georgia,serif;text-align:right;margin:22px 0 0}
+.from:empty{display:none}
+.from,.actions,.note{animation:rise .7s var(--tail,1s) both}
 .actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:30px;padding-top:20px;border-top:1px solid #ddd6c6}
-.ghost{background:transparent;color:var(--text);border:1.5px solid #cfc7b3;padding:10px 16px;font-size:.9rem}
-.ghost:hover{background:#ece6d6}
+.ghost{background:transparent;color:var(--text);border:1.5px solid #cfc7b3;padding:10px 16px;font-size:.9rem;transition:background .2s,translate .2s}
+.ghost:hover{background:#ece6d6;translate:0 -2px}
 .ghost:focus-visible{outline-color:var(--text)}
-.note{color:var(--muted);font-size:.8rem;margin-top:18px}
+.note{color:#6b6454;font-size:.8rem;margin-top:18px}
+.note.warn{color:#9a4a0a;font-weight:600}
+.pop{animation:pop .5s}
 [hidden]{display:none!important}
+::selection{background:rgba(201,162,75,.35)}
+.pr-only,.pr-head{display:none}
 @media(max-width:480px){form{flex-direction:column}.go{padding:15px}}
-@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
-/* ---- animations ---- */
-main{position:relative;z-index:1}
+
+/* ambience */
 .sky{position:fixed;inset:0;overflow:hidden;pointer-events:none;z-index:0}
 .sky::before,.sky::after{content:"";position:absolute;width:60vmax;height:60vmax;border-radius:50%;filter:blur(90px)}
 .sky::before{background:#3b4a9a;opacity:.28;left:-20vmax;top:-28vmax;animation:drift 26s ease-in-out infinite alternate}
 .sky::after{background:var(--wax);opacity:.12;right:-26vmax;bottom:-32vmax;animation:drift 32s ease-in-out infinite alternate-reverse}
 .sky i{position:absolute;width:3px;height:3px;border-radius:50%;background:#cfd6ff;opacity:0;animation:twinkle var(--d) var(--l) infinite ease-in-out}
 .spark{position:fixed;width:5px;height:5px;border-radius:50%;pointer-events:none;z-index:50}
-.env{transform:perspective(800px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));transition:transform .25s ease-out;animation:drop 1s cubic-bezier(.2,1.2,.4,1) backwards,bob 5s 1s ease-in-out infinite}
-.env.open{animation:lift .8s forwards}
-.seal{animation:glow 3s ease-in-out infinite}
-.env.tick .seal{animation:tick .18s}
-.env.lock .seal{animation:wobble .9s}
-#gate h1{animation:rise .8s .45s both}
-.sub{animation:rise .8s .6s both}
-form{animation:rise .8s .75s both}
-.msg:not(:empty){animation:rise .35s both}
-.go{position:relative;overflow:hidden}
-.go::after{content:"";position:absolute;inset:0;background:linear-gradient(100deg,transparent 30%,rgba(255,255,255,.35) 50%,transparent 70%);transform:translateX(-120%);animation:shine 4s 2s infinite}
-.go:hover{translate:0 -2px;box-shadow:0 8px 20px -6px var(--wax)}
-.field.err input{animation:errflash .5s}
-.letter>h2{animation:rise .7s .35s both}
-.letter>.date{animation:rise .7s .5s both}
-.w{animation:fadeword .55s both}
-.from,.actions,.note{animation:rise .7s var(--tail,1s) both}
-.letter.closing{animation:fold .45s ease-in forwards}
-.ghost{transition:background .2s,translate .2s}
-.ghost:hover{translate:0 -2px}
-.pop{animation:pop .5s}
-@keyframes rise{from{opacity:0;translate:0 14px}}
-@keyframes drop{from{opacity:0;translate:0 -70px;scale:.9}}
-@keyframes bob{50%{translate:0 -9px}}
-@keyframes lift{to{translate:0 -14px;scale:1.05}}
-@keyframes glow{50%{box-shadow:0 4px 10px #0007,inset 0 -3px 6px #0004,0 0 24px 5px rgba(201,162,75,.55)}}
-@keyframes tick{50%{scale:1.14}}
-@keyframes wobble{20%,60%{rotate:-9deg}40%,80%{rotate:9deg}}
-@keyframes shine{40%,100%{transform:translateX(120%)}}
-@keyframes errflash{30%{border-color:var(--err);box-shadow:0 0 0 4px rgba(255,154,139,.25);translate:-6px 0}60%{translate:6px 0}}
-@keyframes fadeword{from{opacity:0;filter:blur(5px)}}
-@keyframes fold{to{transform:perspective(1000px) rotateX(-75deg) translateY(-20px);opacity:0}}
-@keyframes pop{40%{scale:1.18}}
-@keyframes twinkle{50%{opacity:.75;transform:scale(1.7)}}
-@keyframes drift{to{translate:12vmax 8vmax}}
-@media print{.sky,.spark,#progress{display:none!important}.w{animation:none!important;opacity:1!important;filter:none!important}}
-.body.dropcap::first-letter{float:left;font-size:3.7em;line-height:.8;padding:.07em .1em 0 0;color:var(--wax2);font-weight:500}
-.date::after{content:"";display:block;width:56px;height:1px;margin-top:16px;background:var(--wax)}
-::selection{background:rgba(201,162,75,.35)}
-h1,.letter>h2{text-wrap:balance}
-.body{text-wrap:pretty}
-.letter h2:focus{outline:none}
 #progress{position:fixed;top:0;left:0;height:3px;width:100%;background:var(--wax);transform:scaleX(0);transform-origin:0 50%;z-index:70;pointer-events:none}
 [data-theme=ocean]{--wax:#1f9d9a;--wax2:#136b6a}
 [data-theme=gold]{--wax:#c4922a;--wax2:#8a6314}
 [data-theme=violet]{--wax:#7b5cd6;--wax2:#4f3a9e}
 [data-theme=forest]{--wax:#3f9a5f;--wax2:#276b3e}
-.from{font:italic 1.2rem Newsreader,Georgia,serif;text-align:right;margin:22px 0 0}
-.from:empty{display:none}
-.pr-only,.pr-head{display:none}
-@page{margin:22mm 24mm 24mm;@bottom-center{content:"Page " counter(page) " of " counter(pages);font:9pt "Instrument Sans",Arial,sans-serif;color:#888}}
+@keyframes rise{from{opacity:0;translate:0 14px}}
+@keyframes drop{from{opacity:0;translate:0 -70px;scale:.9}}
+@keyframes bob{50%{translate:0 -9px}}
+@keyframes lift{to{translate:0 -14px;scale:1.05}}
+@keyframes glow{50%{box-shadow:0 4px 10px #0007,inset 0 -3px 6px #0004,0 0 24px 5px rgba(201,162,75,.55)}}
+@keyframes pulse{50%{transform:scale(1.1)}}
+@keyframes shake{20%,60%{transform:translateX(-7px) rotate(-6deg)}40%,80%{transform:translateX(7px) rotate(6deg)}}
+@keyframes tick{50%{scale:1.14}}
+@keyframes wobble{20%,60%{rotate:-9deg}40%,80%{rotate:9deg}}
+@keyframes shine{40%,100%{transform:translateX(120%)}}
+@keyframes errflash{30%{border-color:var(--err);box-shadow:0 0 0 4px rgba(255,154,139,.25);translate:-6px 0}60%{translate:6px 0}}
+@keyframes fadeword{from{opacity:0;filter:blur(5px)}}
+@keyframes unfold{from{transform:perspective(1000px) rotateX(-75deg) translateY(-20px);opacity:0}to{transform:none;opacity:1}}
+@keyframes fold{to{transform:perspective(1000px) rotateX(-75deg) translateY(-20px);opacity:0}}
+@keyframes pop{40%{scale:1.18}}
+@keyframes twinkle{50%{opacity:.75;transform:scale(1.7)}}
+@keyframes drift{to{translate:12vmax 8vmax}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+/* print */
+@page{margin:22mm 24mm 24mm}
 @media print{
+.sky,.spark,#progress,#gate,.actions,.note{display:none!important}
 html,body{background:#fff!important;height:auto;min-height:0}
 body{display:block;padding:0;color:#1a1a1a;font-size:12pt;-webkit-print-color-adjust:exact;print-color-adjust:exact}
 main{max-width:none}
-#gate,.actions,.note{display:none!important}
-.from{max-width:34em;margin:20pt auto 0;text-align:right;font-size:13pt;color:#333}
+.w{animation:none!important;opacity:1!important;filter:none!important}
+.from{max-width:34em;margin:20pt auto 0;text-align:right;font-size:13pt;color:#333;animation:none}
 .letter{display:block;background:#fff;color:#1a1a1a;box-shadow:none;animation:none;transform:none;opacity:1;border:0;border-radius:0;padding:0;text-align:center}
 .pr-head{display:block;margin:0 0 14pt;break-inside:avoid}
 .pr-head svg{width:36pt;height:36pt}
-.letter h2{font-size:28pt;line-height:1.15;font-weight:500;color:#000;margin:0 auto 8pt;max-width:30ch;letter-spacing:-.01em;break-after:avoid}
-.date{color:#666;font:italic 10.5pt/1.4 Newsreader,Georgia,serif;margin:0 0 26pt}
-.date::after{content:"";display:block;height:1pt;width:38%;margin:16pt auto 0;background:linear-gradient(90deg,transparent,var(--wax),transparent)}
+.letter h2{font-size:28pt;line-height:1.15;font-weight:500;color:#000;margin:0 auto 8pt;max-width:30ch;letter-spacing:-.01em;break-after:avoid;animation:none}
+.date{color:#666;font:italic 10.5pt/1.4 Newsreader,Georgia,serif;margin:0 0 26pt;animation:none}
+.date::after{height:1pt;width:38%;margin:16pt auto 0;background:linear-gradient(90deg,transparent,var(--wax),transparent)}
 .body{text-align:left;font-size:12.5pt;line-height:1.75;color:#1a1a1a;max-width:34em;margin:0 auto;orphans:3;widows:3;hyphens:auto;-webkit-hyphens:auto}
-.body.dropcap::first-letter{float:left;font-size:46pt;line-height:.82;padding:4pt 7pt 0 0;color:var(--wax);font-weight:500}
+.body.dropcap::first-letter{font-size:46pt;line-height:.82;padding:4pt 7pt 0 0;color:var(--wax)}
 #prFoot{display:block;margin:34pt auto 0;text-align:center;font:9pt "Instrument Sans",Arial,sans-serif;color:#888;break-inside:avoid}
 #prFoot::before{content:"";display:block;width:7pt;height:7pt;border-radius:50%;background:var(--wax);margin:0 auto 9pt}
 }
@@ -168,7 +162,7 @@ main{max-width:none}
     <form id="form" autocomplete="off" novalidate>
       <div class="field">
         <input id="code" type="password" placeholder="Your secret code" aria-label="Secret code" maxlength="100" autocapitalize="off" autocorrect="off" spellcheck="false" autofocus>
-        <button type="button" class="eye" id="eye" aria-label="Show code">Show</button>
+        <button type="button" class="eye" id="eye" aria-label="Show code" aria-pressed="false">Show</button>
       </div>
       <button class="go" id="go" type="submit">Open letter</button>
     </form>
@@ -184,10 +178,11 @@ main{max-width:none}
     <p class="from" id="from"></p>
     <div class="actions">
       <button class="ghost" id="copy">Copy note</button>
+      <button class="ghost" id="size" aria-label="Change text size">Aa</button>
       <button class="ghost" id="print">Print or save PDF</button>
       <button class="ghost" id="lock">Close note</button>
     </div>
-    <p class="note" id="noteInfo">This note closes itself after 5 minutes of inactivity.</p>
+    <p class="note" id="noteInfo" role="status">This note closes itself after 5 minutes of inactivity.</p>
     <p class="pr-only" id="prFoot"></p>
   </article>
 </main>
@@ -200,8 +195,8 @@ const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
 const $ = id => document.getElementById(id);
 const wait = ms => new Promise(r => setTimeout(r, ms));
 const calm = matchMedia("(prefers-reduced-motion: reduce)").matches;
-const say = (t, info) => { $("msg").textContent = t; $("msg").className = "msg" + (info ? " info" : ""); };
-let fails = 0, lockUntil = 0, ticker, idle, busy = false;
+const say = (t, info) => { const m = $("msg"); m.textContent = t; m.className = "msg" + (info ? " info" : ""); m.setAttribute("role", !t || info ? "status" : "alert"); };
+let fails = 0, lockUntil = 0, ticker, idle, warn, unlockT, busy = false, baseInfo = "", viewsLeft = null, sure = 0, sizeIdx = 0;
 
 const fetchNote = code => rpc("get_note", { p_code: code });
 async function rpc(fn, args) {
@@ -209,16 +204,17 @@ async function rpc(fn, args) {
   const headers = { apikey: SUPABASE_ANON_KEY, "Content-Type": "application/json" };
   if (!SUPABASE_ANON_KEY.startsWith("sb_")) headers.Authorization = "Bearer " + SUPABASE_ANON_KEY;
   let lastErr;
-  for (let i = 0; i < 3; i++) {                        // retry flaky connections
+  for (let i = 0; i < 3; i++) {                        // retry network and 5xx errors only
     const ctl = new AbortController(), t = setTimeout(() => ctl.abort(), 10000);
     try {
       const res = await fetch(SUPABASE_URL + "/rest/v1/rpc/" + fn, {
         method: "POST", headers, signal: ctl.signal, body: JSON.stringify(args)
       });
+      if (res.status === 429) return { error: "busy" };
       if (res.status >= 500) throw new Error("server");
-      if (!res.ok) throw new Error("bad");
+      if (!res.ok) { const x = new Error("bad"); x.fatal = true; throw x; }
       return await res.json();
-    } catch (e) { lastErr = e; await wait(500 * (i + 1)); }
+    } catch (e) { lastErr = e; if (e.fatal) break; if (i < 2) await wait(500 * (i + 1)); }
     finally { clearTimeout(t); }
   }
   throw lastErr;
@@ -228,6 +224,7 @@ function setEnv(state) { $("env").classList.remove("busy", "bad", "lock"); if (s
 
 function startCooldown(sec) {
   lockUntil = Date.now() + sec * 1000; $("go").disabled = true;
+  try { sessionStorage.setItem("lu", lockUntil); } catch {}   // survives a refresh
   clearInterval(ticker);
   ticker = setInterval(() => {
     const left = Math.ceil((lockUntil - Date.now()) / 1000);
@@ -236,23 +233,36 @@ function startCooldown(sec) {
   }, 250);
 }
 
+function untilUnlock(at) {                           // live "time to go" for time-locked notes
+  clearInterval(unlockT);
+  const f = () => {
+    const s = Math.floor((new Date(at) - Date.now()) / 1000);
+    if (s <= 0) { clearInterval(unlockT); say("The seal is ready. Press Open letter.", true); return; }
+    const d = Math.floor(s / 86400), h = Math.floor(s % 86400 / 3600), m = Math.floor(s % 3600 / 60);
+    say("Sealed until " + new Date(at).toLocaleString(undefined, { dateStyle: "long", timeStyle: "short" }) + " (" + (d ? d + "d " : "") + h + "h " + m + "m to go).", true);
+  };
+  f(); unlockT = setInterval(f, 20000);
+}
+
 async function openNote(code) {
   if (busy || Date.now() < lockUntil || !code) return;
+  clearInterval(unlockT);
   busy = true; $("go").disabled = true; setEnv("busy"); say("Checking…", true);
   try {
     const r = await fetchNote(code);
     if (r && r.ok) {
       setEnv(); fails = 0; say("");
+      const mins = Math.round(r.body.trim().split(/\s+/).length / 200);
       $("title").textContent = r.title || "A letter for you";
-      $("date").textContent = new Date(r.created_at).toLocaleDateString(undefined, { dateStyle: "long" });
-      $("body").textContent = r.body; $("body").classList.toggle("dropcap", r.body.trim().length > 300);                  // textContent: nothing in a note can inject HTML
+      $("date").textContent = new Date(r.created_at).toLocaleDateString(undefined, { dateStyle: "long" }) + (mins > 1 ? " · " + mins + " min read" : "");
+      $("body").textContent = r.body; $("body").classList.toggle("dropcap", r.body.trim().length > 300);   // textContent: nothing in a note can inject HTML
       $("code").value = "";
       document.documentElement.dataset.theme = r.theme || "wax";
       $("from").textContent = r.sender ? "— " + r.sender : "";
       let info = "This note closes itself after 5 minutes of inactivity.";
       if (r.views_left === 0) info += " It can’t be opened again once you close it.";
       else if (r.views_left > 0) info += " It can be opened " + r.views_left + " more time" + (r.views_left === 1 ? "" : "s") + ".";
-      $("noteInfo").textContent = info;
+      viewsLeft = r.views_left; baseInfo = info; $("noteInfo").textContent = info;
       revealBody(r.body);
       if (!calm) burst();
       $("env").classList.add("open");
@@ -260,7 +270,7 @@ async function openNote(code) {
       $("gate").hidden = true; $("letter").hidden = false;
       window.scrollTo(0, 0); armIdle(); $("title").focus({ preventScroll: true });
     } else if (r && r.error === "locked") {
-      setEnv("lock"); say("This note is sealed until " + new Date(r.unlock_at).toLocaleString(undefined, { dateStyle: "long", timeStyle: "short" }) + ". Come back then.", true);
+      setEnv("lock"); untilUnlock(r.unlock_at);
     } else if (r && r.error === "busy") {
       setEnv(); say("Lots of guesses right now. Wait a minute and try again.");
     } else {
@@ -278,28 +288,51 @@ async function openNote(code) {
 }
 
 async function closeNote() {
-  clearTimeout(idle);
+  clearTimeout(idle); clearTimeout(warn);
   if (!$("letter").hidden && !calm) { $("letter").classList.add("closing"); await wait(450); $("letter").classList.remove("closing"); }
   $("letter").hidden = true; $("body").textContent = ""; $("title").textContent = "";
+  viewsLeft = null; sizeIdx = 0; $("letter").style.removeProperty("--fs");
   delete document.documentElement.dataset.theme; $("from").textContent = ""; $("progress").style.transform = "scaleX(0)";
   $("gate").hidden = false; setEnv(); $("env").classList.remove("open");
   history.replaceState(null, "", location.pathname + location.search);
   $("code").focus();
 }
-function armIdle() { clearTimeout(idle); idle = setTimeout(closeNote, 5 * 60 * 1000); }
+function armIdle() {                                 // 5 min idle close, with a warning at 4:30
+  clearTimeout(idle); clearTimeout(warn);
+  const n = $("noteInfo");
+  if (n.classList.contains("warn")) { n.classList.remove("warn"); n.textContent = baseInfo; }
+  warn = setTimeout(() => { n.classList.add("warn"); n.textContent = "Closing in 30 seconds. Tap or scroll to keep it open."; }, 270000);
+  idle = setTimeout(closeNote, 300000);
+}
 ["pointerdown", "keydown", "scroll", "touchstart"].forEach(ev =>
   addEventListener(ev, () => { if (!$("letter").hidden) armIdle(); }, { passive: true }));
 
 $("form").addEventListener("submit", e => { e.preventDefault(); openNote($("code").value.trim()); });
-$("code").addEventListener("input", () => { if (!busy && Date.now() > lockUntil) { say(""); setEnv(); } });
+$("code").addEventListener("input", () => { if (!busy && Date.now() > lockUntil) { clearInterval(unlockT); say(""); setEnv(); } });
+$("code").addEventListener("keyup", e => {          // Caps Lock hint
+  if (busy || Date.now() < lockUntil || !e.getModifierState) return;
+  if (e.getModifierState("CapsLock")) say("Caps Lock is on.", true);
+  else if ($("msg").textContent === "Caps Lock is on.") say("");
+});
+$("env").addEventListener("click", () => $("code").focus());
 $("eye").onclick = () => {
   const show = $("code").type === "password";
   $("code").type = show ? "text" : "password";
   $("eye").textContent = show ? "Hide" : "Show";
   $("eye").setAttribute("aria-label", show ? "Hide code" : "Show code");
+  $("eye").setAttribute("aria-pressed", show);
 };
-$("lock").onclick = closeNote;
+$("lock").onclick = () => {                          // a one-time note asks before it is closed for good
+  if (viewsLeft === 0 && !sure) {
+    $("lock").textContent = "Sure? It can’t reopen";
+    sure = setTimeout(() => { sure = 0; $("lock").textContent = "Close note"; }, 4000);
+    return;
+  }
+  clearTimeout(sure); sure = 0; $("lock").textContent = "Close note"; closeNote();
+};
+$("size").onclick = () => { const s = [1, 1.18, 1.36, .9]; sizeIdx = (sizeIdx + 1) % s.length; $("letter").style.setProperty("--fs", s[sizeIdx]); };
 $("print").onclick = () => print();
+addEventListener("beforeunload", e => { if (!$("letter").hidden && viewsLeft === 0) { e.preventDefault(); e.returnValue = ""; } });
 let savedTitle = document.title;
 addEventListener("beforeprint", () => {
   if ($("letter").hidden) return;
@@ -364,12 +397,17 @@ addEventListener("scroll", () => {                   // thin gold reading-progre
   const h = document.documentElement.scrollHeight - innerHeight;
   $("progress").style.transform = "scaleX(" + (h > 0 && !$("letter").hidden ? Math.min(1, scrollY / h) : 0) + ")";
 }, { passive: true });
-addEventListener("keydown", e => { if (e.key === "Escape" && !$("letter").hidden) closeNote(); });
+addEventListener("keydown", e => { if (e.key === "Escape" && !$("letter").hidden) $("lock").click(); });
+
+// ---- startup ----
+if (matchMedia("(pointer:coarse)").matches) $("code").blur();   // don't hide the envelope behind the phone keyboard
+try { const l = +sessionStorage.getItem("lu"); if (l > Date.now()) startCooldown(Math.ceil((l - Date.now()) / 1000)); } catch {}
 
 // Optional magic link: yoursite/#your-code opens the note straight away.
 // The part after # never leaves the browser, and it is wiped from the address bar once used.
 if (location.hash.length > 1) {
-  const c = decodeURIComponent(location.hash.slice(1));
+  let c = location.hash.slice(1);
+  try { c = decodeURIComponent(c); } catch {}
   history.replaceState(null, "", location.pathname + location.search);
   openNote(c.trim());
 }
